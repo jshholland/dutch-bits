@@ -4,6 +4,7 @@ import sys
 import os.path
 from optparse import OptionParser
 import decimal
+import logging
 
 __version__ = "0.0.1"
 
@@ -40,3 +41,12 @@ parser.add_option("-d", "--debug", dest="debug", action="store_true",
                   default=False)
 
 (options, args) = parser.parse_args()
+
+
+log_format = "%(levelname)s: %(message)s"
+if options.debug:
+    logging.basicConfig(format=log_format, level=logging.DEBUG)
+elif options.verbose:
+    logging.basicConfig(format=log_format, level=logging.INFO)
+else:
+    logging.basicConfig(format=log_format)
