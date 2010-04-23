@@ -49,7 +49,7 @@ parser.add_option("-d", "--debug", dest="debug", action="store_true",
 (options, args) = parser.parse_args()
 
 
-log_format = "%(levelname)s: %(message)s"
+log_format = "%(message)s"
 if options.debug:
     logging.basicConfig(format=log_format, level=logging.DEBUG)
 elif options.verbose:
