@@ -25,6 +25,21 @@ def print_version(option, opt, value, parser):
     print __copyright__
     sys.exit(0)
 
+def solve(func, initial):
+    logging.info("Solving %s with initial value of %s" % (func.__name__, initial))
+    new = func(initial)
+    difference = abs(initial - new)
+    while difference > epsilon:
+        old = new
+        new = func(old)
+        difference = abs(new - old)
+        logging.info("""\
+old value  = %s
+new value  = %s
+difference = %s
+""" % (old, new, difference))
+    return new
+
 parser = OptionParser()
 parser.add_option("-V", "--version", action="callback",
                   callback=print_version,
@@ -93,3 +108,7 @@ else:
     except AttributeError:
         logging.fatal("No value given for initial!")
         sys.exit(1)
+
+# setup is done, proceed with solving
+solution = solve(f, initial)
+print "Solved to give %s" % solution
