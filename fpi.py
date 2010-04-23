@@ -24,18 +24,22 @@ def print_version(option, opt, value, parser):
     sys.exit(0)
 
 parser = OptionParser()
+parser.add_option("-V", "--version", action="callback",
+                  callback=print_version,
+                  help="print version information")
 parser.add_option("-f", "--function", dest="function",
                   help="use FUNCTION in module (default \"f\")",
                   default="f")
 parser.add_option("-m", "--module", dest="module",
                   help="import MODULE for user-defined variables (default \"solve\")",
                   default="solve")
+parser.add_option("-e", "--epsilon", dest="epsilon",
+                  help="set the change considered close enough (default 1e-5)")
+parser.add_option("-i", "--initial", dest="initial",
+                  help="set the starting value for the iteration")
 parser.add_option("-v", "--verbose", dest="verbose", action="store_true",
                   help="give more output",
                   default=False)
-parser.add_option("-V", "--version", action="callback",
-                  callback=print_version,
-                  help="print version information")
 parser.add_option("-d", "--debug", dest="debug", action="store_true",
                   help="enable debugging output",
                   default=False)
