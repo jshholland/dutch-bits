@@ -51,6 +51,30 @@ class InfList(list):
         except IndexError:
             self.append(value)
 
+    def __eq__(self, other):
+        """
+        Override the default list comparison operation to a more "natural" one.
+
+        Two lists (infinite or not) are equal if an infinite list can be
+        extended to a list equal to the other. For example,
+
+         >>> li1, li2 = InfList(), range(3)
+         >>> li1 == li2
+         False
+         >>> li2 = [0] * 3
+         >>> li1 == li2
+         True
+
+        """
+        if super(InfList, self).__eq__(other):
+            return True
+        else:
+            lself, lother = len(self), len(other)
+            if lself < lother and self[:lother] == other:
+                return True
+            else:
+                return False
+
     def __getslice__(self, i, j):
         if self.default == None:
             return super(InfList, self).__getslice__(i, j)
