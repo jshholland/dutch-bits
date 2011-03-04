@@ -34,10 +34,7 @@ class InfList(list):
         It can be changed on an instance via setting of self.default.
         
         """
-        try:
-            self.default = kwds['default']
-        except KeyError:
-            self.default = 0
+        self.default = kwds.pop('default', 0)
         super(InfList, self).__init__(*args, **kwds)
 
     def __getitem__(self, index):
