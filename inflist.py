@@ -7,16 +7,6 @@ Indexing a non-assigned thing works as expected; first, normal lookup is tried
 like normal lists. If that fails, then a default value is returned, or
 optionally an exception is raised.
 
-Currently setting a value outside the currently existing list just appends, so,
-for example,
- >>> li = InfList()
- >>> li[200] = 1
- >>> print li
- [1]
-
-is expected behaviour (for now). I can't really see a use beyond simply setting
-the next value, so this is a low priority "bug".
-
 """
 
 class InfList(list):
@@ -46,9 +36,33 @@ class InfList(list):
             return self.default
 
     def __setitem__(self, index, value):
+        """
+        Override list.__setitem__ to allow creating items off the end.
+
+        If self.default is None, then a too-large index simply appends the new
+        value. If it is not None, then the list is padded out to the right
+        length using self.default.
+
+         >>> li = InfList()
+         >>> li[3] = 1
+         >>> li
+         [0, 0, 0, 1]
+         >>> li.default = None
+         >>> li[5] = 1
+         >>> li
+         [0, 0, 0, 1, 1]
+
+        """
         try:
             super(InfList, self).__setitem__(index, value)
         except IndexError:
+            i = len(self)
+            if self.default == None:
+                self.append(value)
+                return
+            while i < index:
+                self.append(self.default)
+                i += 1
             self.append(value)
 
     def __eq__(self, other):
