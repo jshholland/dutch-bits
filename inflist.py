@@ -50,3 +50,13 @@ class InfList(list):
             super(InfList, self).__setitem__(index, value)
         except IndexError:
             self.append(value)
+
+    def __getslice__(self, i, j):
+        if self.default == None:
+            return super(InfList, self).__getslice__(i, j)
+        else:
+            retval = InfList(default=self.default)
+            while i < j:
+                retval.append(self[i])
+                i += 1
+            return retval
