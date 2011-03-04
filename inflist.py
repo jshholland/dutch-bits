@@ -38,7 +38,7 @@ class InfList(list):
             self.default = kwds['default']
         except KeyError:
             self.default = 0
-        super(InfList, self).__init__(self, *args, **kwds)
+        super(InfList, self).__init__(*args, **kwds)
 
     def __getitem__(self, index):
         try:
