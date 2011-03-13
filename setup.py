@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
         name='dutch-bits',
-        version='0.1',
+        version='0.2',
         description='Homebrew Python toolkit. Use at your own risk :)',
         author='Josh Holland',
         author_email='jrh@joshh.co.uk',
@@ -16,5 +16,6 @@ setup(
             'Topic :: Scientific/Engineering :: Mathematics',
             'Topic :: Utilities',
         ],
-        py_modules = ['inflist']
+        py_modules = ['inflist'],
+        scripts = ['fpi.py'],
  )
