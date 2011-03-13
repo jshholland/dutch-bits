@@ -14,15 +14,16 @@ fpi.py is an equation solver written in Python. It uses the method of fixed
 point iteration based on a user-provided script and command line parameters
 to define the function to solve and various other parameters.
 
-Hopefully the code is more or less self-documenting, check ./fpi.py --help too.
+Hopefully the code is more or less self-documenting, check `./fpi.py --help` too.
 
 The only requirement is a working Python implementation; only core packages
 are used.
 
 TODO
-- establish whether using decimal.Decimal is the right way to go
-  (it's a pain to use with the math modul)
-- add a load of docstrings
+ - establish whether using decimal.Decimal is the right way to go
+   (it's a pain to use with the math module)
+
+ - add a load of docstrings
 
 inflist.py
 ----------
